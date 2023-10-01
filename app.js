@@ -5,6 +5,17 @@ const app = express()
 const PORT=8000;
 const cache = new Map();
 
+function removeFirstCacheElement() {
+    const firstKey = cache.keys().next().value;
+    if (firstKey) {
+      cache.delete(firstKey);
+      console.log(`Removed element with key: ${firstKey} from cache.`);
+    }
+  }
+
+// remove cache for every one minute
+setInterval(removeFirstCacheElement,60000) 
+
 app.listen(PORT,()=>{
     console.log(`Server Started on ${PORT}.........`);
 })
